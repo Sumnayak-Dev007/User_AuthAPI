@@ -4,10 +4,11 @@ __pycache__/
 
 # Virtual environment
 env/
-.env
 
-# Django static files
-staticfiles/
+# Ignore local settings & environment files
+.env
+*.env
+
 
 # Pytest cache
 .pytest_cache/

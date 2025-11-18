@@ -6,8 +6,6 @@ __pycache__/
 env/
 .env
 
-# Django collected static
-staticfiles/
 
 # Pytest cache
 .pytest_cache/
@@ -15,3 +13,6 @@ staticfiles/
 # Git
 .git/
 .gitignore
+
+# Docker compose & entry scripts (not needed inside image)
+docker-compose.yml
