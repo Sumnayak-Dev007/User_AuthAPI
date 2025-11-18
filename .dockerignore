@@ -14,5 +14,4 @@ env/
 .git/
 .gitignore
 
-# Docker compose & entry scripts (not needed inside image)
-docker-compose.yml
+
