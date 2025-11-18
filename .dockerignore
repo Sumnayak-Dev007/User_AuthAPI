@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+env/
+.env
+
+# Django collected static
+staticfiles/
+
+# Pytest cache
+.pytest_cache/
+
+# Git
+.git/
+.gitignore

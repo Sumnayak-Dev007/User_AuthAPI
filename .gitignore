@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+env/
+.env
+
+# Django static files
+staticfiles/
+
+# Pytest cache
+.pytest_cache/
+
+# Docker
+*.log
+
