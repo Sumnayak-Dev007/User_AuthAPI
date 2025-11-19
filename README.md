@@ -1,42 +1,36 @@
-## User Authentication API (Django + Docker)
-#### Overview
+# User Authentication API (Django + Docker)
+### Overview
 
 This project implements a Django REST API for user management, including registration, login, and profile retrieval. It is fully Dockerized with PostgreSQL and includes JWT token authentication.
 
-Features:
+### Features
+- Custom user model extending Django’s AbstractUser with additional fields: (phone_number, date_of_birth, last_login_ip)
+- User registration, login, and profile retrieval
+- JWT authentication
+- Middleware for capturing user IP
+- Fully Dockerized with PostgreSQL
+- Pytest test cases included
 
-Custom user model extending Django’s AbstractUser with additional fields:
 
-phone_number (validated for Indian numbers)
+### REST endpoints:
 
-date_of_birth
+#### POST /api/register/ — User registration with JWT tokens
 
-last_login_ip
+#### POST /api/login/ — User login and obtain JWT tokens
 
-REST endpoints:
+#### GET /api/profile/ — Retrieve authenticated user profile 
 
-POST /api/register/ — User registration with JWT tokens
-
-POST /api/login/ — User login and obtain JWT tokens
-
-GET /api/profile/ — Retrieve authenticated user profile 
-
-Dockerized environment for easy setup
-
-Pytest unit tests included
-
-Middleware to capture and store user IP address
-
+# Installation & Running
 
 ## Prerequisites
 
-Docker (>=20.10)
+#### Docker (>=20.10)
 
-Docker Compose (>=2.0)
+#### Docker Compose (>=2.0)
 
-Optional: Postman or Insomnia for API testing
+#### Optional: Postman or Insomnia for API testing
 
-Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
+#### Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
 
 ## Installation & Running
 
@@ -67,16 +61,124 @@ docker-compose up --build -d
 #### Password: admin123
 
 ## Testing
-### run unit tests with Pytest:
+### Run unit tests with Pytest:
 ```
 docker-compose exec web pytest -vv -s
 
 ```
-#### All tests are in users/auth_pytest.py/
+### Test File Location
+```
+users/tests/auth_pytest.py/
 
-##### Covers registration, login, and profile endpoints
+```
 
-## Notes
+### What is covered in the test cases?
+
+#### The tests include:
+
+### User Registration Test
+
+##### - Validates successful registration
+
+##### - Confirms returned fields: username, email, phone number, DOB
+
+#### - Ensures JWT access and refresh tokens are generated
+
+#### - Verifies signup IP is stored through custom middleware
+
+### - User Login Test
+
+#### - Checks valid username/password authentication
+
+#### - Verifies access + refresh tokens are returned
+
+#### - Ensures last_login_ip is saved correctly
+
+### User Profile Test
+
+#### - Confirms /api/profile/ requires JWT authentication
+
+#### - Validates returned profile data for authenticated user
+
+#### - Confirms last_login_ip updates after login
+
+#### - Invalid Phone Number Test
+
+#### - Tests phone number validation for Indian format
+
+#### - Ensures incorrect phone numbers are rejected with 400 Bad Request
+
+# API Endpoints
+### 1. Register a new user
+
+### - Endpoint: POST /api/register/
+
+### - Request JSON:
+```
+{
+  "username": "test1",
+  "email": "test@gmail.com",
+  "password": "asdf1234",
+  "password_again": "asdf1234",
+  "phone_number": "+919876543210",
+  "date_of_birth": "2004-08-20"
+}
+
+```
+### - Response JSON:
+```
+{
+  "username": "test1",
+  "email": "test@gmail.com",
+  "phone_number": "+919876543210",
+  "date_of_birth": "2004-08-20",
+  "signup_ip": "172.18.0.1",
+  "refresh": "<refresh_token>",
+  "access": "<access_token>"
+}
+
+```
+### 2. Login
+### - Endpoint: POST /api/login/
+### - Request JSON:
+```
+{
+  "username": "test1",
+  "password": "asdf1234"
+}
+
+```
+### - Response JSON:
+```
+{
+  "refresh": "<refresh_token>",
+  "access": "<access_token>"
+}
+
+```
+## 3. Get User Profile
+
+### - Endpoint: GET /api/profile/
+### - Authorization: Bearer token in header
+```
+Authorization: Bearer <access_token>
+
+```
+
+### - Response JSON:
+```
+{
+  "username": "test1",
+  "email": "test@gmail.com",
+  "phone_number": "+919876543210",
+  "date_of_birth": "2004-08-20",
+  "signup_ip": "172.18.0.1"
+}
+
+
+```
+### You can use Postman, Insomnia, or curl to test these endpoints.
+# Notes
 
 The project is fully Dockerized; 
 
@@ -91,6 +193,8 @@ This will:
 - Run migrations automatically
 
 - Create a superuser automatically
+
+- Start the Django server at :  http://localhost:8000
 
 entrypoint.sh handles migrations, superuser creation, and static files.
 
