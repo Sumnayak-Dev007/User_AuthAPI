@@ -72,7 +72,7 @@ Password:
 ## Testing
 Run unit tests with Pytest:
 ```
-docker-compose exec web pytest
+docker-compose exec web pytest -vv -s
 
 ```
 All tests are in users/auth_pytest.py/
