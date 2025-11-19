@@ -55,7 +55,7 @@ docker-compose up --build -d
 
 #### Django server will start at :  http://localhost:8000
 
-#### 3. Open your browser and visit : http://localhost:8000
+### 3. Open your browser and visit : http://localhost:8000
 
 
 ### 4. Access the API & Admin Panel
