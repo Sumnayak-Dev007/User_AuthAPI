@@ -182,7 +182,7 @@ Authorization: Bearer <access_token>
 
 
 ```
-## Overview
+# Overview
 
 ### Features
 - Custom user model extending Django’s AbstractUser with additional fields: (phone_number, date_of_birth, last_login_ip)
