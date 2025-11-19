@@ -21,8 +21,6 @@ This project implements a Django REST for user management, including registratio
 
 #### GET /api/profile/ — Retrieve authenticated user profile 
 
-# Installation & Running
-
 ## Prerequisites
 
 #### Docker (>=20.10)
@@ -34,16 +32,20 @@ This project implements a Django REST for user management, including registratio
 #### Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
 
 ## Installation & Running
+## To install and run the server, kindly proceed with the steps below:
 
-### 1. Clone the repository
+### 1. Clone the repository 
 
 ```
 git clone https://github.com/Sumnayak-Dev007/User_AuthAPI.git
 
+```
+### 2. navigate into the project directory
+```
 cd User_AuthAPI
 
 ```
-### 2. Build and start Docker containers
+### 3. Build and start Docker containers
 
 ```
 docker-compose up --build -d
@@ -52,26 +54,32 @@ docker-compose up --build -d
 
 #### Django server will start at :  http://localhost:8000
 
-### 3. Open your browser and visit : http://localhost:8000
+### 4. Open your browser and visit : http://localhost:8000
 
 
-### 4. Access the API & Admin Panel
+### 5. Access the API & Admin Panel
 
 ### Admin Panel: http://localhost:8000/admin/
+### Login to the admin panel using:
 
 #### Username: admin
 
 #### Password: admin123
 
+### 6. You can test the API using:
+- ### Postman
+- ### Insomnia
+- ### Or by running the provided test suite given below.
+
 ## Testing
-### Run unit tests with Pytest:
+### Run unit tests with Pytest in the same directory where you ran docker-compose : 
 ```
 docker-compose exec web pytest -vv -s
 
 ```
 ### Test File Location
 ```
-users/tests/auth_pytest.py/
+users/tests/auth_pytest.py
 
 ```
 
