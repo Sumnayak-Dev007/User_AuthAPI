@@ -13,7 +13,8 @@ This project implements a Django REST for user management, including registratio
 #### Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
 
 # Installation & Running
-## To install and run the server, kindly proceed with the steps below:
+## To install and run the server, simply run the commands in the order listed below:
+
 
 ### 1. Clone the repository 
 
@@ -21,7 +22,7 @@ This project implements a Django REST for user management, including registratio
 git clone https://github.com/Sumnayak-Dev007/User_AuthAPI.git
 
 ```
-### 2. navigate into the project directory
+### 2. navigate into the User_AuthAPI directory
 ```
 cd User_AuthAPI
 
