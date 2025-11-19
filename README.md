@@ -78,35 +78,35 @@ users/tests/auth_pytest.py/
 
 ### User Registration Test
 
-##### - Validates successful registration
+- ##### Validates successful registration
 
-##### - Confirms returned fields: username, email, phone number, DOB
+- ##### Confirms returned fields: username, email, phone number, DOB
 
-#### - Ensures JWT access and refresh tokens are generated
+- #### Ensures JWT access and refresh tokens are generated
 
-#### - Verifies signup IP is stored through custom middleware
+- #### Verifies signup IP is stored through custom middleware
 
-### - User Login Test
+### User Login Test
 
-#### - Checks valid username/password authentication
+- #### Checks valid username/password authentication
 
-#### - Verifies access + refresh tokens are returned
+- #### Verifies access + refresh tokens are returned
 
-#### - Ensures last_login_ip is saved correctly
+- #### Ensures last_login_ip is saved correctly
 
 ### User Profile Test
 
-#### - Confirms /api/profile/ requires JWT authentication
+- #### Confirms /api/profile/ requires JWT authentication
 
-#### - Validates returned profile data for authenticated user
+- #### Validates returned profile data for authenticated user
 
-#### - Confirms last_login_ip updates after login
+- #### Confirms last_login_ip updates after login
 
-#### - Invalid Phone Number Test
+- #### Invalid Phone Number Test
 
-#### - Tests phone number validation for Indian format
+- #### Tests phone number validation for Indian format
 
-#### - Ensures incorrect phone numbers are rejected with 400 Bad Request
+- #### Ensures incorrect phone numbers are rejected with 400 Bad Request
 
 # API Endpoints
 ### 1. Register a new user
