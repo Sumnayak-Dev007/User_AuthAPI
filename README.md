@@ -60,6 +60,7 @@ http://localhost:8000/admin/
 ### 6. You can test the API using:
 - ### Postman
 - ### Insomnia
+- ### curl
 - ### Or by running the provided test suite given below.
 
 ## Testing
