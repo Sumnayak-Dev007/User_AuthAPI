@@ -63,9 +63,12 @@ docker-compose up --build -d
 ```
 
 
-### 5. Access the API & Admin Panel
+### 5. Access the Admin Panel at : 
 
-### Admin Panel: ```http://localhost:8000/admin/```
+```
+http://localhost:8000/admin/
+
+```
 ### Login to the admin panel using:
 
 #### Username: admin
