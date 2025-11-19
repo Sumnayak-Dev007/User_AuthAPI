@@ -78,9 +78,9 @@ users/tests/auth_pytest.py/
 
 ### User Registration Test
 
-- ##### Validates successful registration
+- #### Validates successful registration
 
-- ##### Confirms returned fields: username, email, phone number, DOB
+- #### Confirms returned fields: username, email, phone number, DOB
 
 - #### Ensures JWT access and refresh tokens are generated
 
@@ -111,9 +111,9 @@ users/tests/auth_pytest.py/
 # API Endpoints
 ### 1. Register a new user
 
-### - Endpoint: POST /api/register/
+- ### Endpoint: POST /api/register/
 
-### - Request JSON:
+- ### Request JSON:
 ```
 {
   "username": "test1",
@@ -125,7 +125,7 @@ users/tests/auth_pytest.py/
 }
 
 ```
-### - Response JSON:
+- ### Response JSON:
 ```
 {
   "username": "test1",
@@ -139,8 +139,8 @@ users/tests/auth_pytest.py/
 
 ```
 ### 2. Login
-### - Endpoint: POST /api/login/
-### - Request JSON:
+- ### Endpoint: POST /api/login/
+- ### Request JSON:
 ```
 {
   "username": "test1",
@@ -148,7 +148,7 @@ users/tests/auth_pytest.py/
 }
 
 ```
-### - Response JSON:
+- ### Response JSON:
 ```
 {
   "refresh": "<refresh_token>",
@@ -158,14 +158,14 @@ users/tests/auth_pytest.py/
 ```
 ## 3. Get User Profile
 
-### - Endpoint: GET /api/profile/
-### - Authorization: Bearer token in header
+- ### Endpoint: GET /api/profile/
+- ### Authorization: Bearer token in header
 ```
 Authorization: Bearer <access_token>
 
 ```
 
-### - Response JSON:
+- ### Response JSON:
 ```
 {
   "username": "test1",
