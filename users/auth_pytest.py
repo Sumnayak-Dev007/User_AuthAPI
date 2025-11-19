@@ -20,11 +20,11 @@ def test_register_login_profile_flow():
         "date_of_birth": "2004-05-20",
     }
 
-    print("\n▶ Testing user registration...")
+    print("\nTesting user registration...")
 
     r = client.post(register_url, user_data, format="json")
-    assert r.status_code == 201, f"❌ Register failed: {r.data}"
-    assert "access" in r.data, "❌ JWT access token missing in register response"
+    assert r.status_code == 201, f"Register failed: {r.data}"
+    assert "access" in r.data, "JWT access token missing in register response"
 
     access = r.data["access"]
     refresh = r.data["refresh"]
@@ -33,19 +33,19 @@ def test_register_login_profile_flow():
     print("✔ JWT token received")
 
     # Login
-    print("\n▶ Testing login...")
+    print("\nTesting login...")
     login_data = {
         "username": "testuser",
         "password": "StrongPassw0rd!"
     }
 
     l = client.post(login_url, login_data, format="json", REMOTE_ADDR="1.2.3.4")
-    assert l.status_code == 200, f"❌ Login failed: {l.data}"
+    assert l.status_code == 200, f"Login failed: {l.data}"
 
-    print("✔ Login success")
+    print("Login success")
 
     # Profile access
-    print("\n▶ Validating profile data...")
+    print("\nValidating profile data...")
 
     client.credentials(HTTP_AUTHORIZATION=f"Bearer {access}")
     pr = client.get(profile_url)
@@ -63,7 +63,7 @@ def test_register_login_profile_flow():
         f"❌ last_login_ip not updated correctly (got {user.last_login_ip})"
     )
 
-    print("✔ last_login_ip correctly stored")
+    print("last_login_ip correctly stored")
     print("\nUser authentication flow successful — user is valid")
 
 
@@ -81,13 +81,13 @@ def test_invalid_phone_registration():
         "date_of_birth": "2000-02-02",
     }
 
-    print("\n▶ Testing invalid phone number validation...")
+    print("\nTesting invalid phone number validation...")
 
     r = client.post(register_url, user_data, format="json")
 
-    assert r.status_code == 400, f"❌ Expected validation error, got {r.status_code}"
+    assert r.status_code == 400, f"Expected validation error, got {r.status_code}"
     assert "phone_number" in r.data or "non_field_errors" in r.data, (
-        f"❌ No phone number error message received. Response: {r.data}"
+        f"No phone number error message received. Response: {r.data}"
     )
 
     print("✔ Invalid phone_number correctly rejected")
@@ -110,7 +110,7 @@ def test_profile_requires_auth_and_returns_correct_fields():
 
     # Try profile without auth
     response = client.get("/api/profile/")
-    assert response.status_code == 401, "❌ Profile should require authentication"
+    assert response.status_code == 401, "Profile should require authentication"
 
     # Login to get token
     login_response = client.post(
@@ -136,4 +136,4 @@ def test_profile_requires_auth_and_returns_correct_fields():
     user.refresh_from_db()
     assert user.last_login_ip == "9.8.7.6"
 
-    print("\n✔ Profile endpoint validated in isolation")
+    print("\nProfile endpoint validated in isolation")

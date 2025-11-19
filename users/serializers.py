@@ -1,4 +1,3 @@
-# users/serializers.py
 from rest_framework import serializers
 from .models import CustomUser
 from django.contrib.auth.password_validation import validate_password
@@ -30,7 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     date_of_birth = serializers.DateField(
         required=False,
         label="date_of_birth",
-        input_formats=['%Y-%m-%d']  # optional: for correct input format in browsable API
+        input_formats=['%Y-%m-%d']  
     )
 
     class Meta:
@@ -45,7 +44,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         if len(data["password"]) < 8:
             raise serializers.ValidationError({"password": "Password must be at least 8 characters."})
 
-        # No other validation (common password, numeric, similarity) is enforced
         
         return data
 

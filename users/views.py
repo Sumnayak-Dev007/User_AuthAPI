@@ -1,14 +1,17 @@
-# users/views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import serializers
 from rest_framework import status, permissions, generics
 from .serializers import RegisterSerializer, UserSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from rest_framework import parsers, renderers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import CustomUser
+
+
 
 class RegisterView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -22,7 +25,7 @@ class RegisterView(generics.CreateAPIView):
 
         refresh = RefreshToken.for_user(user)
 
-        # Get the IP from middleware
+        # Getting the IP from middleware.py
         
         signup_ip = getattr(request, "_client_ip", None)
 
@@ -39,21 +42,22 @@ class RegisterView(generics.CreateAPIView):
         return Response(response_data, status=status.HTTP_201_CREATED)
 
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+
+# Custom JWT serializer for login.
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        # custom claims can be added here
         token["username"] = user.username
         return token
+
+
 
 class LoginView(TokenObtainPairView):
     permission_classes = [AllowAny]
     serializer_class = MyTokenObtainPairSerializer
 
-    # override post to also update last_login_ip if present
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         # If authentication succeeded, update user's last_login_ip
@@ -80,6 +84,9 @@ class LoginView(TokenObtainPairView):
                 user.save(update_fields=["last_login_ip"])
         return response
 
+
+# Allows authenticated users to retrieve their own profile information.
+# Requires access token in the Authorization header.
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
 

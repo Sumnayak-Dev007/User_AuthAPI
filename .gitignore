@@ -13,6 +13,4 @@ env/
 # Pytest cache
 .pytest_cache/
 
-# Docker
-*.log
 

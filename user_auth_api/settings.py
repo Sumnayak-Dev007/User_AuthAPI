@@ -84,12 +84,20 @@ WSGI_APPLICATION = 'user_auth_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
+
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'authdb'),
+        'USER': os.getenv('POSTGRES_USER', 'authuser'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'authpass'),
+        'HOST': os.getenv('POSTGRES_HOST', 'db'),  
+        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+    }
 }
+
+
 
 
 # Password validation

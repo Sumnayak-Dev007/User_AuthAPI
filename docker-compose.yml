@@ -1,26 +1,32 @@
-version: "3.8"
+version: '3.9'
+
 services:
   db:
     image: postgres:15
+    container_name: auth_db
+    restart: always
     environment:
       POSTGRES_DB: authdb
       POSTGRES_USER: authuser
       POSTGRES_PASSWORD: authpass
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - webnet
 
   web:
     build: .
-    command: /code/entrypoint.sh
+    container_name: auth_web
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - db
     environment:
-      DEBUG: "1"
-      DJANGO_SECRET_KEY: "unsafe-secret-for-dev"
       POSTGRES_DB: authdb
       POSTGRES_USER: authuser
       POSTGRES_PASSWORD: authpass
@@ -28,14 +34,8 @@ services:
       POSTGRES_PORT: 5432
       DJANGO_SUPERUSER_USERNAME: admin
       DJANGO_SUPERUSER_EMAIL: admin@example.com
-      DJANGO_SUPERUSER_PASSWORD: adminpass
-    depends_on:
-      - db
-    networks:
-      - webnet
+      DJANGO_SUPERUSER_PASSWORD: admin123
 
 volumes:
   postgres_data:
 
-networks:
-  webnet:

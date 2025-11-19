@@ -1,4 +1,3 @@
-# users/middleware.py
 from django.utils.deprecation import MiddlewareMixin
 
 class CaptureIPMiddleware(MiddlewareMixin):
@@ -9,7 +8,6 @@ class CaptureIPMiddleware(MiddlewareMixin):
     def _get_client_ip(self, request):
         x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
         if x_forwarded_for:
-            # X-Forwarded-For can be comma-separated list; first is original client
             ip = x_forwarded_for.split(",")[0].strip()
         else:
             ip = request.META.get("REMOTE_ADDR")
