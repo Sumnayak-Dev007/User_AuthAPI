@@ -1,26 +1,5 @@
 # User Authentication API (Django + Docker)
-### Overview
-
-This project implements a Django REST for user management, including registration, login, and profile retrieval. It is fully Dockerized with PostgreSQL and includes JWT token authentication.
-
-### Features
-- Custom user model extending Django’s AbstractUser with additional fields: (phone_number, date_of_birth, last_login_ip)
-- User registration, login, and profile retrieval
-- JWT authentication
-- Middleware for capturing user IP
-- Fully Dockerized with PostgreSQL
-- Pytest test cases included
-- class-based views
-
-
-### REST endpoints:
-
-#### POST /api/register/ — User registration with JWT tokens
-
-#### POST /api/login/ — User login and obtain JWT tokens
-
-#### GET /api/profile/ — Retrieve authenticated user profile 
-
+ 
 ## Prerequisites
 
 #### Docker (>=20.10)
@@ -32,7 +11,7 @@ This project implements a Django REST for user management, including registratio
 #### Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
 
 ## Installation & Running
-## To install and run the server, kindly proceed with the steps below:
+### To install and run the server, kindly proceed with the steps below:
 
 ### 1. Clone the repository 
 
@@ -86,7 +65,7 @@ http://localhost:8000/admin/
 docker-compose exec web pytest -vv -s
 
 ```
-### Test File Location
+### The test file is located at:
 ```
 users/tests/auth_pytest.py
 
