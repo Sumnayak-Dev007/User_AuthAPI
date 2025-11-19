@@ -39,48 +39,58 @@ Optional: Postman or Insomnia for API testing
 Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
 
 ## Installation & Running
-1. Clone the repository
+
+#### 1. Clone the repository
+
 ```
 git clone https://github.com/Sumnayak-Dev007/User_AuthAPI.git
 
 ```
-2. Build and start Docker containers
-```
-docker-compose up --build
+#### 2. Build and start Docker containers
 
 ```
-This will:
+docker-compose up --build -d
 
-Build the Django image
+```
 
-Start PostgreSQL and Django containers
+#### Django server will start at http://localhost:8000
 
-Run migrations automatically
+#### 3. Open your browser and visit: http://localhost:8000
 
-Create a superuser automatically
 
-Start the Django server at http://localhost:8000
+#### 4. Access the API & Admin Panel
 
-4. Access the API & Admin Panel
+##### Admin Panel: http://localhost:8000/admin/
 
-Admin Panel: http://localhost:8000/admin/
+###### Username: admin
 
-Username: admin
-
-Password: 
+###### Password: admin123
 
 ## Testing
-Run unit tests with Pytest:
+#### run unit tests with Pytest:
 ```
 docker-compose exec web pytest -vv -s
 
 ```
-All tests are in users/auth_pytest.py/
+###### All tests are in users/auth_pytest.py/
 
-Covers registration, login, and profile endpoints
+###### Covers registration, login, and profile endpoints
 
 ## Notes
-The project is fully Dockerized; just run docker-compose up --build.
+
+The project is fully Dockerized; 
+
+just run docker-compose up --build.
+
+This will:
+
+- Build the Django image
+
+- Start PostgreSQL and Django containers
+
+- Run migrations automatically
+
+- Create a superuser automatically
 
 entrypoint.sh handles migrations, superuser creation, and static files.
 
