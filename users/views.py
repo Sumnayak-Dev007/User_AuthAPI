@@ -23,7 +23,7 @@ class RegisterView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        refresh = RefreshToken.for_user(user)
+
 
         # Getting the IP from middleware.py
         
@@ -34,9 +34,7 @@ class RegisterView(generics.CreateAPIView):
             "email": user.email,
             "phone_number": user.phone_number,
             "date_of_birth": user.date_of_birth,
-            "signup_ip": signup_ip,  # include IP in response
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
+            "signup_ip": signup_ip, 
         }
 
         return Response(response_data, status=status.HTTP_201_CREATED)

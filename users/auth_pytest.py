@@ -15,7 +15,7 @@ def test_register_login_profile_flow():
         "username": "testuser",
         "email": "test@example.com",
         "password": "StrongPassw0rd!",
-        "password2": "StrongPassw0rd!",
+        "password_again": "StrongPassw0rd!",
         "phone_number": "9876543210",
         "date_of_birth": "2004-05-20",
     }
@@ -76,7 +76,7 @@ def test_invalid_phone_registration():
         "username": "badphone",
         "email": "bad@example.com",
         "password": "StrongPassw0rd!",
-        "password2": "StrongPassw0rd!",
+        "password_again": "StrongPassw0rd!",
         "phone_number": "12345",
         "date_of_birth": "2000-02-02",
     }

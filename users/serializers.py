@@ -37,23 +37,45 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ("username", "email", "password", "password_again", "phone_number", "date_of_birth")
         extra_kwargs = {"email": {"required": True}}
 
+    def validate_username(self, value):
+        if CustomUser.objects.filter(username=value).exists():
+            raise serializers.ValidationError("Username already exists.")
+        return value
+
+
+    def validate_email(self, value):
+        if CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email already exists.")
+        return value
+
+
     def validate(self, data):
         if data["password"] != data["password_again"]:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
 
         if len(data["password"]) < 8:
             raise serializers.ValidationError({"password": "Password must be at least 8 characters."})
-
-        
         return data
 
+
     def create(self, validated_data):
-        validated_data.pop("password_again", None)
+        validated_data.pop("password_again")
         password = validated_data.pop("password")
+
         user = CustomUser(**validated_data)
         user.set_password(password)
-        user.save()
+
+        try:
+            user.full_clean()     
+            user.save()
+        except DjangoValidationError as e:
+            # returns proper field-level errors
+            raise serializers.ValidationError(e.message_dict)
+
         return user
+
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
