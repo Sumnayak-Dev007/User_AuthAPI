@@ -40,6 +40,8 @@ This project implements a Django REST for user management, including registratio
 ```
 git clone https://github.com/Sumnayak-Dev007/User_AuthAPI.git
 
+cd User_AuthAPI
+
 ```
 ### 2. Build and start Docker containers
 
