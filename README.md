@@ -1,7 +1,7 @@
 # User Authentication API (Django + Docker)
 ### Overview
 
-This project implements a Django REST API for user management, including registration, login, and profile retrieval. It is fully Dockerized with PostgreSQL and includes JWT token authentication.
+This project implements a Django REST for user management, including registration, login, and profile retrieval. It is fully Dockerized with PostgreSQL and includes JWT token authentication.
 
 ### Features
 - Custom user model extending Django’s AbstractUser with additional fields: (phone_number, date_of_birth, last_login_ip)
@@ -10,6 +10,7 @@ This project implements a Django REST API for user management, including registr
 - Middleware for capturing user IP
 - Fully Dockerized with PostgreSQL
 - Pytest test cases included
+- class-based views
 
 
 ### REST endpoints:
@@ -74,7 +75,7 @@ users/tests/auth_pytest.py/
 
 ### What is covered in the test cases?
 
-#### The tests include:
+### The tests include:
 
 ### User Registration Test
 
@@ -84,13 +85,19 @@ users/tests/auth_pytest.py/
 
 - #### Ensures JWT access and refresh tokens are generated
 
-- #### Verifies signup IP is stored through custom middleware
+- #### Verifies signup_ip is stored through custom middleware
+
+- #### Invalid Phone Number Test
+
+- #### Tests phone number validation for Indian format
+
+- #### Ensures incorrect phone numbers are rejected with 400 Bad Request
 
 ### User Login Test
 
 - #### Checks valid username/password authentication
 
-- #### Verifies access + refresh tokens are returned
+- #### Verified access + refresh tokens are returned
 
 - #### Ensures last_login_ip is saved correctly
 
@@ -98,15 +105,14 @@ users/tests/auth_pytest.py/
 
 - #### Confirms /api/profile/ requires JWT authentication
 
+- #### Allows authenticated users to retrieve their own profile information.
+
+- #### Requires access token in the Authorization header.
+
 - #### Validates returned profile data for authenticated user
 
 - #### Confirms last_login_ip updates after login
 
-- #### Invalid Phone Number Test
-
-- #### Tests phone number validation for Indian format
-
-- #### Ensures incorrect phone numbers are rejected with 400 Bad Request
 
 # API Endpoints
 ### 1. Register a new user
@@ -132,9 +138,7 @@ users/tests/auth_pytest.py/
   "email": "test@gmail.com",
   "phone_number": "+919876543210",
   "date_of_birth": "2004-08-20",
-  "signup_ip": "172.18.0.1",
-  "refresh": "<refresh_token>",
-  "access": "<access_token>"
+  "signup_ip": "172.18.0.1"
 }
 
 ```
@@ -168,11 +172,12 @@ Authorization: Bearer <access_token>
 - ### Response JSON:
 ```
 {
+  "id": 1,
   "username": "test1",
   "email": "test@gmail.com",
   "phone_number": "+919876543210",
   "date_of_birth": "2004-08-20",
-  "signup_ip": "172.18.0.1"
+  "last_login_ip": "172.18.0.1"
 }
 
 
