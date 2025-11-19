@@ -10,8 +10,8 @@
 
 #### Docker handles Python, PostgreSQL, and dependencies automatically — no manual setup required.
 
-## Installation & Running
-### To install and run the server, kindly proceed with the steps below:
+# Installation & Running
+## To install and run the server, kindly proceed with the steps below:
 
 ### 1. Clone the repository 
 
