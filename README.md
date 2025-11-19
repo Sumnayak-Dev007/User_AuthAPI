@@ -51,11 +51,11 @@ docker-compose up --build -d
 http://localhost:8000/admin/
 
 ```
-### Login to the admin panel using:
+## Login to the admin panel using:
 
-#### Username: admin
+### Username: admin
 
-#### Password: admin123
+### Password: admin123
 
 ### 6. You can test the API using:
 - ### Postman
@@ -139,7 +139,7 @@ users/tests/auth_pytest.py
   "email": "test@gmail.com",
   "phone_number": "+919876543210",
   "date_of_birth": "2004-08-20",
-  "signup_ip": "172.18.0.1"
+  "signup_ip": "127.0.0.1"
 }
 
 ```
@@ -178,7 +178,7 @@ Authorization: Bearer <access_token>
   "email": "test@gmail.com",
   "phone_number": "+919876543210",
   "date_of_birth": "2004-08-20",
-  "last_login_ip": "172.18.0.1"
+  "last_login_ip": "127.0.0.1"
 }
 
 
